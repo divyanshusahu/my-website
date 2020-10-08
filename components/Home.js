@@ -15,7 +15,7 @@ function Home() {
         <div>
           <h1 className="font-serif text-6xl">Divyanshu Sahu</h1>
           <h2 className="font-mono text-2xl">
-            Full Stack Developer and Web Application Secutiry Enthusiast
+            Full Stack Developer and Web Application Security Enthusiast
           </h2>
         </div>
       </section>
