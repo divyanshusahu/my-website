@@ -7,20 +7,15 @@
     "start": "NODE_ENV=production next start"
   },
   "devDependencies": {
-    "@prefresh/next": "^1.2.4",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-preset-env": "^6.7.0",
-    "react-refresh": "^0.8.3",
     "tailwindcss": "^1.8.12"
   },
   "dependencies": {
     "next": "^9.5.4",
-    "preact": "^10.5.4",
-    "preact-render-to-string": "^5.1.10",
-    "react": "github:preact-compat/react#1.0.0",
-    "react-dom": "github:preact-compat/react-dom#1.0.0",
-    "react-icons": "^3.11.0",
-    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.0.1"
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-icons": "^3.11.0"
   },
   "license": "UNLICENSE"
 }
