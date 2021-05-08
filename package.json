@@ -7,15 +7,15 @@
     "start": "NODE_ENV=production next start"
   },
   "devDependencies": {
-    "autoprefixer": "^10.0.2",
-    "postcss": "^8.1.9",
-    "tailwindcss": "^2.0.1"
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.14",
+    "tailwindcss": "^2.1.2"
   },
   "dependencies": {
     "next": "^10.2.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-icons": "^3.11.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0"
   },
   "license": "UNLICENSE"
 }
