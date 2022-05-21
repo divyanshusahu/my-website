@@ -3,12 +3,12 @@ import profilePic from "../public/profile.jpeg";
 
 function Home() {
   return (
-    <div className="px-2 pt-16">
+    <div className="px-4 pt-16">
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-2 lg:col-span-1 lg:order-last mx-auto">
           <Image src={profilePic} alt="Divyanshu Sahu" />
         </div>
-        <div className="col-span-2 lg:col-span-1 px-4">
+        <div className="col-span-2 lg:col-span-1">
           <div className="h-full flex items-center">
             <h1 className="text-3xl text-slate-800 font-serif">
               Hi, I'm Divyanshu. I'm an experienced full stack developer with
