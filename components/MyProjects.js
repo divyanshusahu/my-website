@@ -12,7 +12,7 @@ const projectsData = [
     title: "EBook Downloader",
     subtitle:
       "A python-based web scraping tool using Beautiful Soup library, which downloads ebooks from gen.lib.rus.ec",
-    tags: ["Python", "Web Scraping", "Beautiful Soup"],
+    tags: ["Python", "Web Scraping"],
     source: "https://github.com/divyanshusahu/EBook-Downloader",
   },
   {
@@ -23,8 +23,7 @@ const projectsData = [
   },
   {
     title: "Ethereum Todo List",
-    subtitle:
-      "A simple todo list made on ethereum blockchain.",
+    subtitle: "A simple todo list made on ethereum blockchain.",
     tags: ["Ethereum", "Solidity", "Smart Contract"],
     source: "https://github.com/divyanshusahu/ethereum-todo-list",
   },
