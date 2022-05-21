@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Divyanshu Sahu: Full Stack Developer</title>
+        <title>Divyanshu Sahu | Full Stack Developer</title>
       </Head>
       <Component {...pageProps} />
     </>

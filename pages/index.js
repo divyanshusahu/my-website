@@ -1,7 +1,12 @@
+import Layout from "../components/Layout";
+import Home from "../components/Home";
+
 function Index() {
-  return <div>
-    <h1 className="text-3xl font-bold underline">Divyanshu Sahu</h1>
-  </div>;
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  );
 }
 
 export default Index;
