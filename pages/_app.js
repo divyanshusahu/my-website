@@ -107,29 +107,28 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:image:alt" content="Profile" />
         <meta property="og:site_name" content="Divyanshu's Personal Website" />
         <meta property="og:locale" content="en_US" />
+      </Head>
+      <Script
+        key="jsonld_website"
+        id="jsonld-website"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld_website) }}
+      />
 
-        <Script
-          key="jsonld_website"
-          id="jsonld-website"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld_website) }}
-        />
-
-        <Script
-          id="google-tag-manager"
-          src="https://www.googletagmanager.com/gtag/js?id=UA-169266417-2"
-          async
-        />
-        <Script
-          id="google-tag-mamager-2"
-          dangerouslySetInnerHTML={{
-            __html: ` window.dataLayer = window.dataLayer || [];
+      <Script
+        id="google-tag-manager"
+        src="https://www.googletagmanager.com/gtag/js?id=UA-169266417-2"
+        async
+      />
+      <Script
+        id="google-tag-mamager-2"
+        dangerouslySetInnerHTML={{
+          __html: ` window.dataLayer = window.dataLayer || [];
                       function gtag(){dataLayer.push(arguments);}
                       gtag('js', new Date());
                       gtag('config', 'UA-169266417-2');`,
-          }}
-        />
-      </Head>
+        }}
+      />
       <Component {...pageProps} />
     </>
   );
