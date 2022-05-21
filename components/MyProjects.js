@@ -37,7 +37,7 @@ function MyProjects() {
         My Projects
       </h1>
       {projectsData.map((projectData, index) => (
-        <div className="mb-4" key={index}>
+        <div className="mb-4 lg:mb-8" key={index}>
           <ProjectCard
             title={projectData.title}
             subtitle={projectData.subtitle}
