@@ -24,7 +24,7 @@ function ProjectCard(props) {
         </div>
         <div className="hidden col-span-1 lg:block">
           <div className="h-full flex items-center justify-center">
-            <a href={props.source} target="_blank">
+            <a href={props.source} target="_blank" rel="noreferrer">
               <button className="px-4 py-2 rounded-md text-slate-800 bg-slate-100 flex items-center justify-evenly">
                 <Image src={githubIcon24} alt="Github" />
                 <span className="ml-4 text-slate-600 text-sm">Source</span>

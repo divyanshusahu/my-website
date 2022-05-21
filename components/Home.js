@@ -11,7 +11,7 @@ function Home() {
         <div className="col-span-2 lg:col-span-1">
           <div className="h-full flex items-center">
             <h1 className="text-3xl text-slate-800 font-serif">
-              Hi, I'm Divyanshu. I'm an experienced full stack developer with
+              Hi, I&apos;m Divyanshu. I&apos;m an experienced full stack developer with
               deep interest in application security.
             </h1>
           </div>

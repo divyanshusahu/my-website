@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 
 import "../styles/globals.css";
 
@@ -89,7 +90,10 @@ function MyApp({ Component, pageProps }) {
         />
         <meta name="twitter:image:alt" content="Profile" />
 
-        <meta property="og:url" content="https://www.divyanshusahu.vercel.app" />
+        <meta
+          property="og:url"
+          content="https://www.divyanshusahu.vercel.app"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Divyanshu Sahu" />
         <meta
@@ -104,17 +108,20 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:site_name" content="Divyanshu's Personal Website" />
         <meta property="og:locale" content="en_US" />
 
-        <script
+        <Script
           key="jsonld_website"
+          id="jsonld-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld_website) }}
         />
 
-        <script
-          async
+        <Script
+          id="google-tag-manager"
           src="https://www.googletagmanager.com/gtag/js?id=UA-169266417-2"
-        ></script>
-        <script
+          async
+        />
+        <Script
+          id="google-tag-mamager-2"
           dangerouslySetInnerHTML={{
             __html: ` window.dataLayer = window.dataLayer || [];
                       function gtag(){dataLayer.push(arguments);}

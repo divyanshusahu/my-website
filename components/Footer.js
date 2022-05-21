@@ -23,6 +23,7 @@ function Footer() {
           className="mr-6"
           href="https://twitter.com/divyan5hu"
           target="_blank"
+          rel="noreferrer"
         >
           <Image src={twitterIcon32} alt="divyan5hu" />
         </a>
@@ -30,10 +31,15 @@ function Footer() {
           className="mr-6"
           href="https://www.linkedin.com/in/divyanshu-sahu/"
           target="_blank"
+          rel="noreferrer"
         >
           <Image src={linkedinIcon32} alt="divyanshu-sahu" />
         </a>
-        <a href="https://github.com/divyanshusahu" target="_blank">
+        <a
+          href="https://github.com/divyanshusahu"
+          target="_blank"
+          rel="noreferrer"
+        >
           <Image src={githubIcon32} alt="dsahu1997@gmail.com" />
         </a>
       </div>
