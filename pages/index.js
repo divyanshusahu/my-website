@@ -1,7 +1,5 @@
-import Layout from "../components/Layout";
-
 function Index() {
-  return <Layout />;
+  return <div>Hello</div>;
 }
 
 export default Index;

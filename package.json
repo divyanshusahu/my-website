@@ -1,21 +1,26 @@
 {
-  "name": "personal-website",
-  "version": "1.0.0",
+  "name": "my-website",
+  "version": "2.0.0",
+  "description": "My personal website",
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production next start"
+    "start": "next start",
+    "lint": "next lint"
   },
-  "devDependencies": {
-    "autoprefixer": "^10.2.5",
-    "postcss": "^8.2.14",
-    "tailwindcss": "^2.1.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/divyanshusahu/my-website.git"
   },
+  "author": "Divyanshu Sahu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/divyanshusahu/my-website/issues"
+  },
+  "homepage": "https://github.com/divyanshusahu/my-website#readme",
   "dependencies": {
-    "next": "^10.2.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0"
-  },
-  "license": "UNLICENSE"
+    "next": "^12.1.6",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
 }
