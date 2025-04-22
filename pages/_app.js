@@ -108,6 +108,30 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:site_name" content="Divyanshu's Personal Website" />
         <meta property="og:locale" content="en_US" />
       </Head>
+
+      {/* Theme script - runs before the page renders to prevent flash of wrong theme */}
+      <Script
+        id="theme-script"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              try {
+                const darkMode = localStorage.getItem('darkMode') === 'true';
+                if (darkMode) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {
+                // If localStorage is not available or throws an error, do nothing
+                console.error('Error accessing localStorage:', e);
+              }
+            })();
+          `,
+        }}
+      />
+
       <Script
         key="jsonld_website"
         id="jsonld-website"

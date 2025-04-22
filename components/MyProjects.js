@@ -32,7 +32,7 @@ const projectsData = [
 function MyProjects() {
   return (
     <div className="px-4 py-16">
-      <h1 className="py-16 text-2xl font-bold text-center text-slate-800">
+      <h1 className="py-16 text-2xl font-bold text-center text-slate-800 dark:text-slate-100 transition-colors duration-200">
         My Projects
       </h1>
       {projectsData.map((projectData, index) => (
