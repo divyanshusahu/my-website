@@ -11,23 +11,23 @@ function ProjectCard(props) {
             {props.title}
           </h1>
           <h2 className="text-sm text-slate-600">{props.subtitle}</h2>
-          <div className="pt-4 flex justify-start flex-wrap">
+          <div className="pt-4 flex flex-wrap gap-1">
             {props.tags.map((tag, index) => (
-              <button
-                className="rounded-full bg-slate-100 px-4 py-2 text-xs text-slate-500 mr-1"
+              <span
+                className="rounded-full bg-slate-100 px-4 py-2 text-xs text-slate-500"
                 key={index}
               >
                 {tag}
-              </button>
+              </span>
             ))}
           </div>
         </div>
         <div className="hidden col-span-1 lg:block">
           <div className="h-full flex items-center justify-center">
             <a href={props.source} target="_blank" rel="noreferrer">
-              <button className="px-4 py-2 rounded-md text-slate-800 bg-slate-100 flex items-center justify-evenly">
-                <Image src={githubIcon24} alt="Github" />
-                <span className="ml-4 text-slate-600 text-sm">Source</span>
+              <button className="px-4 py-2 rounded-md text-slate-800 bg-slate-100 flex items-center gap-2">
+                <Image src={githubIcon24} alt="Github" width={24} height={24} />
+                <span className="text-slate-600 text-sm">Source</span>
               </button>
             </a>
           </div>

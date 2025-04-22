@@ -15,32 +15,30 @@ function Footer() {
         Feel free to email me about anything. Do you have some feedback or
         suggestions?
       </h2>
-      <div className="mt-8 flex justify-center">
-        <a className="mr-6" href="mailto:dsahu1997@gmail.com">
-          <Image src={emailIcon32} alt="dsahu1997@gmail.com" />
+      <div className="mt-8 flex justify-center gap-6">
+        <a href="mailto:dsahu1997@gmail.com">
+          <Image src={emailIcon32} alt="dsahu1997@gmail.com" width={32} height={32} />
         </a>
         <a
-          className="mr-6"
           href="https://twitter.com/divyan5hu"
           target="_blank"
           rel="noreferrer"
         >
-          <Image src={twitterIcon32} alt="divyan5hu" />
+          <Image src={twitterIcon32} alt="divyan5hu" width={32} height={32} />
         </a>
         <a
-          className="mr-6"
           href="https://www.linkedin.com/in/divyanshu-sahu/"
           target="_blank"
           rel="noreferrer"
         >
-          <Image src={linkedinIcon32} alt="divyanshu-sahu" />
+          <Image src={linkedinIcon32} alt="divyanshu-sahu" width={32} height={32} />
         </a>
         <a
           href="https://github.com/divyanshusahu"
           target="_blank"
           rel="noreferrer"
         >
-          <Image src={githubIcon32} alt="dsahu1997@gmail.com" />
+          <Image src={githubIcon32} alt="dsahu1997@gmail.com" width={32} height={32} />
         </a>
       </div>
     </div>

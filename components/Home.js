@@ -6,7 +6,11 @@ function Home() {
     <div className="px-4 pt-16">
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-2 lg:col-span-1 lg:order-last mx-auto">
-          <Image src={profilePic} alt="Divyanshu Sahu" />
+          <Image 
+            src={profilePic} 
+            alt="Divyanshu Sahu" 
+            priority 
+          />
         </div>
         <div className="col-span-2 lg:col-span-1">
           <div className="h-full flex items-center">
