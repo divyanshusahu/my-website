@@ -26,8 +26,8 @@ function Home() {
   return (
     <div className="px-4 pt-16 md:pt-24 pb-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-        <div className={`lg:order-last mx-auto opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: '0.3s' }}>
-          <div className="relative max-w-[512px] max-h-[768px]">
+        <div className={`lg:order-last mx-auto opacity-0 w-full flex justify-center ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: '0.3s' }}>
+          <div className="relative w-full max-w-[350px] lg:max-w-[512px]">
             <div className="absolute -inset-1 bg-gradient-to-r from-slate-400 to-slate-600 dark:from-slate-600 dark:to-slate-800 rounded-lg blur-lg opacity-50 group-hover:opacity-70 transition duration-1000"></div>
             <Image 
               src={profilePic} 
@@ -35,8 +35,8 @@ function Home() {
               priority 
               width={512}
               height={768}
-              className="relative rounded-lg shadow-xl transition-all duration-300 dark:brightness-90 hover:scale-[1.01] cursor-pointer object-cover"
-              style={{ maxWidth: '512px', maxHeight: '768px' }}
+              className="relative rounded-lg shadow-xl transition-all duration-300 dark:brightness-90 hover:scale-[1.01] cursor-pointer object-cover w-full h-auto"
+              style={{ maxWidth: '100%', maxHeight: '768px' }}
             />
             <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-slate-500/20 dark:bg-slate-300/10 rounded-full blur-xl z-0"></div>
             <div className="absolute -top-3 -left-3 w-20 h-20 bg-slate-500/20 dark:bg-slate-300/10 rounded-full blur-xl z-0"></div>
