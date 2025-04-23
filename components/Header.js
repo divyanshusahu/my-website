@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 function Header() {
   const [darkMode, setDarkMode] = useState(false);
@@ -28,7 +29,21 @@ function Header() {
   };
 
   return (
-    <header className="py-4 px-4 flex justify-end">
+    <header className="py-4 px-4 flex justify-between items-center">
+      <nav>
+        <ul className="flex gap-6">
+          <li>
+            <Link href="/" className="text-slate-800 dark:text-slate-100 hover:text-slate-600 dark:hover:text-slate-300 transition-colors duration-200">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/blogs" className="text-slate-800 dark:text-slate-100 hover:text-slate-600 dark:hover:text-slate-300 transition-colors duration-200">
+              Blogs
+            </Link>
+          </li>
+        </ul>
+      </nav>
       <button
         onClick={toggleDarkMode}
         className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 transition-colors duration-200"
