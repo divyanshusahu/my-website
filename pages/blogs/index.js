@@ -111,9 +111,9 @@ function BlogIndex({ blogs }) {
                     </div>
                     <div className="terminal-card-content">
                       <p className="text-slate-600 dark:text-slate-300 font-mono">
-                        <span className="text-emerald-500">$</span> find ./posts -name "*.md"<br />
+                        <span className="text-emerald-500">$</span> find ./posts -name &quot;*.md&quot;<br />
                         <span className="text-yellow-500">No files found.</span><br /><br />
-                        <span className="text-emerald-500">$</span> echo "No blog posts found. Check back soon!"
+                        <span className="text-emerald-500">$</span> echo &quot;No blog posts found. Check back soon!&quot;
                       </p>
                     </div>
                   </div>

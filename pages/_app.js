@@ -112,7 +112,7 @@ function MyApp({ Component, pageProps }) {
       {/* Theme script - runs before the page renders to prevent flash of wrong theme */}
       <Script
         id="theme-script"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             (function() {

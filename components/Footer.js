@@ -37,7 +37,7 @@ function Footer() {
           </h2>
           <p className="text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
             Feel free to email me about anything. Do you have some feedback or
-            suggestions? I'd love to hear from you!
+            suggestions? I&apos;d love to hear from you!
           </p>
         </div>
 
@@ -129,11 +129,11 @@ function Footer() {
         <div className="text-center text-sm text-slate-500 dark:text-slate-400 font-mono">
           <p className="mb-2">
             <span className="text-emerald-500">const</span> website = 
-            <span className="text-yellow-600 dark:text-yellow-500"> 'Built with Next.js & Tailwind'</span>;
+            <span className="text-yellow-600 dark:text-yellow-500"> &apos;Built with Next.js & Tailwind&apos;</span>;
           </p>
           <p>
             <span className="text-emerald-500">console</span>.log(
-            <span className="text-yellow-600 dark:text-yellow-500">'© {currentYear} Divyanshu Sahu'</span>);
+            <span className="text-yellow-600 dark:text-yellow-500">&apos;© {currentYear} Divyanshu Sahu&apos;</span>);
           </p>
         </div>
       </div>

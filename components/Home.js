@@ -53,7 +53,7 @@ function Home() {
           <h1 className="font-mono text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <span className="gradient-text">console.log</span>
             <span className="text-slate-800 dark:text-slate-100">(</span>
-            <span className="text-yellow-600 dark:text-yellow-400">'Hello World'</span>
+            <span className="text-yellow-600 dark:text-yellow-400">&apos;Hello World&apos;</span>
             <span className="text-slate-800 dark:text-slate-100">);</span>
           </h1>
           
