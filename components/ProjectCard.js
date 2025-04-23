@@ -7,7 +7,7 @@ function ProjectCard(props) {
   
   return (
     <div 
-      className="terminal-card group hover:scale-[1.01] transition-all duration-300"
+      className="terminal-card group hover:scale-[1.01] transition-all duration-300 h-full flex flex-col"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -18,9 +18,9 @@ function ProjectCard(props) {
         <div className="ml-2 text-xs text-slate-400 font-mono">{props.title}.project</div>
       </div>
       
-      <div className="px-5 py-4 dark:bg-slate-800 bg-slate-100">
-        <div className="grid grid-cols-4 gap-4">
-          <div className="col-span-4 lg:col-span-3">
+      <div className="px-5 py-4 dark:bg-slate-800 bg-slate-100 flex-grow flex flex-col">
+        <div className="grid grid-cols-4 gap-4 h-full">
+          <div className="col-span-4 lg:col-span-3 flex flex-col">
             <h1 className="text-lg py-2 text-slate-800 dark:text-slate-100 font-bold font-mono transition-colors duration-200 flex items-center">
               <span className="text-emerald-500 mr-2">&gt;</span> {props.title}
               {isHovered && <span className="inline-block w-2 h-5 bg-emerald-500 ml-2 animate-pulse"></span>}
@@ -28,7 +28,7 @@ function ProjectCard(props) {
             <h2 className="text-sm text-slate-600 dark:text-slate-300 transition-colors duration-200 font-mono pl-6">
               # {props.subtitle}
             </h2>
-            <div className="pt-4 flex flex-wrap gap-1 pl-6">
+            <div className="pt-4 flex flex-wrap gap-1 pl-6 mt-auto">
               {props.tags.map((tag, index) => (
                 <span
                   className="rounded-full bg-slate-200 dark:bg-slate-700 px-3 py-1 text-xs text-slate-600 dark:text-slate-300 transition-colors duration-200 border border-slate-300 dark:border-slate-600"
