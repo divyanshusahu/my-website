@@ -36,7 +36,7 @@ function BlogCard({ blog }) {
 
 function BlogIndex({ blogs }) {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Head>
         <title>Blogs | Divyanshu Sahu</title>
         <meta
@@ -45,21 +45,23 @@ function BlogIndex({ blogs }) {
         />
       </Head>
 
-      <Layout>
-        <div className="px-4 py-16">
-          <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100 transition-colors duration-200 mb-8">
-            Blog Posts
-          </h1>
-          
-          {blogs.length > 0 ? (
-            blogs.map((blog) => <BlogCard key={blog.slug} blog={blog} />)
-          ) : (
-            <p className="text-slate-600 dark:text-slate-300">No blog posts yet. Check back soon!</p>
-          )}
-        </div>
-      </Layout>
+      <div className="flex-grow">
+        <Layout>
+          <div className="px-4 py-16">
+            <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100 transition-colors duration-200 mb-8">
+              Blog Posts
+            </h1>
+            
+            {blogs.length > 0 ? (
+              blogs.map((blog) => <BlogCard key={blog.slug} blog={blog} />)
+            ) : (
+              <p className="text-slate-600 dark:text-slate-300">No blog posts yet. Check back soon!</p>
+            )}
+          </div>
+        </Layout>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
