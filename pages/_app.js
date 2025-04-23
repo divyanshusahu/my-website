@@ -112,19 +112,22 @@ function MyApp({ Component, pageProps }) {
       {/* Theme script - runs before the page renders to prevent flash of wrong theme */}
       <Script
         id="theme-script"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             (function() {
               try {
-                const darkMode = localStorage.getItem('darkMode') === 'true';
-                if (darkMode) {
+                const storedPreference = localStorage.getItem('darkMode');
+                // Default to dark mode if preference is not set
+                const isDarkMode = storedPreference === null ? true : storedPreference === 'true';
+                if (isDarkMode) {
                   document.documentElement.classList.add('dark');
                 } else {
                   document.documentElement.classList.remove('dark');
                 }
               } catch (e) {
-                // If localStorage is not available or throws an error, do nothing
+                // If localStorage is not available or throws an error, default to dark mode
+                document.documentElement.classList.add('dark');
                 console.error('Error accessing localStorage:', e);
               }
             })();
