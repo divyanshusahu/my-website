@@ -7,7 +7,9 @@ function Header() {
 
   useEffect(() => {
     // On component mount, check if user previously set a theme preference
-    const isDarkMode = localStorage.getItem("darkMode") === "true";
+    // If not set, default to dark mode
+    const storedPreference = localStorage.getItem("darkMode");
+    const isDarkMode = storedPreference === null ? true : storedPreference === "true";
     setDarkMode(isDarkMode);
     if (isDarkMode) {
       document.documentElement.classList.add("dark");

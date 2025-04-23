@@ -117,14 +117,17 @@ function MyApp({ Component, pageProps }) {
           __html: `
             (function() {
               try {
-                const darkMode = localStorage.getItem('darkMode') === 'true';
-                if (darkMode) {
+                const storedPreference = localStorage.getItem('darkMode');
+                // Default to dark mode if preference is not set
+                const isDarkMode = storedPreference === null ? true : storedPreference === 'true';
+                if (isDarkMode) {
                   document.documentElement.classList.add('dark');
                 } else {
                   document.documentElement.classList.remove('dark');
                 }
               } catch (e) {
-                // If localStorage is not available or throws an error, do nothing
+                // If localStorage is not available or throws an error, default to dark mode
+                document.documentElement.classList.add('dark');
                 console.error('Error accessing localStorage:', e);
               }
             })();
