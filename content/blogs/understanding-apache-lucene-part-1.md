@@ -102,19 +102,7 @@ When a user types **"quick fox"**, Lucene performs:
 
 Here's a diagram of the search flow:
 
-```mermaid
-graph TD
-  A[User Query "quick fox"] --> B[Query Analyzer]
-  B --> C[Terms: quick, fox]
-  C --> D[Lookup in Inverted Index]
-  D --> E{"quick → [1, 2]\nfox → [1]"}
-  E --> F[Boolean AND]
-  F --> G["[1]"]
-  G --> H[Scoring & Top-K]
-  H --> I["Doc 1 (score=1.23)"]
-  I --> J[Fetch Stored Fields]
-  J --> K[Return Document #1]
-```
+<img src="/graphs/sample-flowchart.svg" alt="search sample flowchart" width="50%" style={{margin: 'auto'}} />
 
 ---
 
@@ -198,33 +186,8 @@ Here’s how you might index it in Lucene:
 
 ### Visualizing the Index Paths
 
-```mermaid
-graph TD
-  Doc[Document "BlogPost"]
-  Doc --> F1[id: StringField]
-  Doc --> F2[title: TextField]
-  Doc --> F3[body: TextField]
-  Doc --> F4[published: LongPoint + StoredField]
-  Doc --> F5[tags: StringField ×3 + DocValues]
 
-  subgraph InvertedIndex["Inverted Index"]
-    F1 -- indexed --> inv1["1234-uuid"]
-    F2 -- tokens --> inv2["deep,dive,lucene,..."]
-    F3 -- tokens --> inv3["lucene,provides,..."]
-    F5 -- tokens --> inv5["search,java,lucene"]
-  end
-
-  subgraph StoredFields["Stored Fields"]
-    F1 -- stored --> sf1["1234-uuid"]
-    F2 -- stored --> sf2["Deep Dive into Lucene"]
-    F4 -- stored --> sf4["2025-04-28"]
-    F5 -- stored --> sf5["search,java,lucene"]
-  end
-
-  subgraph DocValuesFields["DocValues"]
-    F5 -- docValues --> dv5["search,java,lucene"]
-  end
-```
+<img src="/graphs/lucene-search-flow.svg" alt="search sample flowchart" style={{height: '200%'}} />
 
 ---
 

@@ -1,0 +1,11 @@
+graph TD
+  A[User Query: quick fox] --> B[Query Analyzer]
+  B --> C[Terms: quick, fox]
+  C --> D[Lookup in Inverted Index]
+  D --> E{"quick → [1, 2], fox → [1]"}
+  E --> F[Boolean AND]
+  F --> G["[1]"]
+  G --> H[Scoring & Top-K]
+  H --> I["Doc 1 (score=1.23)"]
+  I --> J[Fetch Stored Fields]
+  J --> K[Return Document #1]

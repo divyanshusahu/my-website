@@ -8,12 +8,11 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import Layout from "../../components/Layout";
 import Footer from "../../components/Footer";
-import MermaidWrapper from "../../components/MermaidWrapper";
 import { getAllBlogSlugs, getBlogBySlug } from "../../lib/blog";
 
 // Custom components for MDX
 const components = {
-  // No need for custom pre component, MermaidWrapper will handle it
+  // Add any custom components here if needed
 };
 
 function BlogPost({ blog, mdxSource }) {
@@ -178,9 +177,7 @@ function BlogPost({ blog, mdxSource }) {
                   </div>
 
                   <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-mono prose-headings:text-slate-800 dark:prose-headings:text-slate-100 prose-h1:text-2xl prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-200 dark:prose-h2:border-slate-700 prose-h2:pb-2 prose-a:text-emerald-600 dark:prose-a:text-emerald-400 prose-code:text-emerald-600 dark:prose-code:text-emerald-400 prose-pre:bg-slate-800 prose-pre:border prose-pre:border-slate-700">
-                    <MermaidWrapper>
-                      <MDXRemote {...mdxSource} components={components} />
-                    </MermaidWrapper>
+                    <MDXRemote {...mdxSource} components={components} />
                   </div>
                 </div>
               </div>
