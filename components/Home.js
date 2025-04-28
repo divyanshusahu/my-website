@@ -5,7 +5,7 @@ import profilePic from "../public/me.png";
 function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [displayText, setDisplayText] = useState("");
-  const fullText = "Hi, I'm Divyanshu. I'm an experienced full stack developer with deep interest in application security.";
+  const fullText = "Hi, I'm Divyanshu. I'm a senior software engineer with expertise in DevOps and Apache Lucene search technologies.";
   
   useEffect(() => {
     setIsLoaded(true);
@@ -46,7 +46,7 @@ function Home() {
         <div className="flex flex-col justify-center h-full">
           <div className="mb-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <div className="inline-block px-4 py-2 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 text-sm font-medium mb-2">
-              Full Stack Developer & Security Enthusiast
+              Senior Software Engineer • DevOps • Search Technologies
             </div>
           </div>
           

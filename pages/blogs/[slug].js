@@ -13,7 +13,17 @@ import { getAllBlogSlugs, getBlogBySlug } from "../../lib/blog";
 function BlogPost({ blog, mdxSource }) {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState(false);
-
+  // Calculate estimated reading time
+  const readingTime = blog.content ? Math.ceil(blog.content.split(' ').length / 200) : 0;
+  // Format date for display and structured data
+  const formattedDate = new Date(blog.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  // ISO date for structured data
+  const isoDate = new Date(blog.date).toISOString();
+  
   useEffect(() => {
     setIsLoaded(true);
   }, []);
@@ -29,11 +39,63 @@ function BlogPost({ blog, mdxSource }) {
     );
   }
 
+  // Schema.org structured data for blog post
+  const blogPostSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": blog.title,
+    "description": blog.description,
+    "keywords": blog.tags ? blog.tags.join(", ") : "",
+    "author": {
+      "@type": "Person",
+      "name": "Divyanshu Sahu"
+    },
+    "datePublished": isoDate,
+    "image": "https://www.divyanshu.pro/profile.jpeg",
+    "publisher": {
+      "@type": "Person",
+      "name": "Divyanshu Sahu",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.divyanshu.pro/profile.jpeg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://www.divyanshu.pro/blogs/${blog.slug}`
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Head>
         <title>{blog.title} | Divyanshu Sahu</title>
         <meta name="description" content={blog.description} />
+        
+        {/* SEO meta tags */}
+        <meta name="keywords" content={blog.tags ? blog.tags.join(', ') : 'blog, technology, programming'} />
+        <meta name="author" content="Divyanshu Sahu" />
+        <meta property="article:published_time" content={isoDate} />
+        <meta property="article:author" content="Divyanshu Sahu" />
+        {blog.tags && blog.tags.map((tag, index) => (
+          <meta property="article:tag" content={tag} key={index} />
+        ))}
+        
+        {/* Open Graph meta tags */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${blog.title} | Divyanshu Sahu`} />
+        <meta property="og:description" content={blog.description} />
+        <meta property="og:url" content={`https://www.divyanshu.pro/blogs/${blog.slug}`} />
+        <meta property="og:image" content="https://www.divyanshu.pro/profile.jpeg" />
+        
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={blog.title} />
+        <meta name="twitter:description" content={blog.description} />
+        <meta name="twitter:image" content="https://www.divyanshu.pro/profile.jpeg" />
+        
+        {/* Schema.org structured data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema) }} />
       </Head>
 
       <div className="flex-grow">
@@ -86,17 +148,13 @@ function BlogPost({ blog, mdxSource }) {
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                       </svg>
-                      {new Date(blog.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
+                      {formattedDate}
                     </span>
                     <span className="inline-flex items-center">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      {blog.content ? Math.ceil(blog.content.split(' ').length / 200) : 0} min read
+                      {readingTime} min read
                     </span>
                   </div>
 
