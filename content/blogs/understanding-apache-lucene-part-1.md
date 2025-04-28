@@ -1,5 +1,5 @@
 ---
-title: Understanding Apache Lucene: Architecture and Indexing Explained
+title: Understanding Apache Lucene - Architecture and Indexing Explained
 date: '2025-04-25'
 description: A comprehensive guide to Apache Lucene, covering its core architecture, indexing and searching pipelines, document modeling, and best practices for field types and data organization.
 tags: ['lucene', 'java', 'search', 'indexing', 'full-text-search', 'architecture']
@@ -100,28 +100,20 @@ When a user types **"quick fox"**, Lucene performs:
     - Retrieve stored fields (e.g., title, snippet) for Doc 1
     - Return to the caller with score and document data
 
-Here’s a simple ASCII diagram of the flow:
+Here's a diagram of the search flow:
 
-```text
-User Query "quick fox"
-        ↓
-[ Query Analyzer ]
-        ↓
-Terms: quick, fox
-        ↓
-[ Lookup in Inverted Index ]
-quick → [1, 2]
-  fox → [1]
-        ↓
-[ Boolean AND ]
-       [1]
-        ↓
-[ Scoring & Top-K ]
-   Doc 1 (score=1.23)
-        ↓
-[ Fetch Stored Fields ]
-        ↓
- Return Document #1
+```mermaid
+graph TD
+  A[User Query "quick fox"] --> B[Query Analyzer]
+  B --> C[Terms: quick, fox]
+  C --> D[Lookup in Inverted Index]
+  D --> E{"quick → [1, 2]\nfox → [1]"}
+  E --> F[Boolean AND]
+  F --> G["[1]"]
+  G --> H[Scoring & Top-K]
+  H --> I["Doc 1 (score=1.23)"]
+  I --> J[Fetch Stored Fields]
+  J --> K[Return Document #1]
 ```
 
 ---
@@ -215,22 +207,22 @@ graph TD
   Doc --> F4[published: LongPoint + StoredField]
   Doc --> F5[tags: StringField ×3 + DocValues]
 
-  subgraph Inverted Index
-    F1 -- indexed → inv1[("1234-uuid")]
-    F2 -- tokens → inv2[("deep"),("dive"),("lucene"),…]
-    F3 -- tokens → inv3[("lucene"),("provides"),…]
-    F5 -- tokens → inv5[("search"),("java"),("lucene")]
+  subgraph InvertedIndex["Inverted Index"]
+    F1 -- indexed --> inv1["1234-uuid"]
+    F2 -- tokens --> inv2["deep,dive,lucene,..."]
+    F3 -- tokens --> inv3["lucene,provides,..."]
+    F5 -- tokens --> inv5["search,java,lucene"]
   end
 
-  subgraph Stored Fields
-    F1 -- stored → sf1["1234-uuid"]
-    F2 -- stored → sf2["Deep Dive into Lucene"]
-    F4 -- stored → sf4["2025-04-28"]
-    F5 -- stored → sf5["search","java","lucene"]
+  subgraph StoredFields["Stored Fields"]
+    F1 -- stored --> sf1["1234-uuid"]
+    F2 -- stored --> sf2["Deep Dive into Lucene"]
+    F4 -- stored --> sf4["2025-04-28"]
+    F5 -- stored --> sf5["search,java,lucene"]
   end
 
-  subgraph DocValues
-    F5 -- docValues → dv5[["search","java","lucene"]]
+  subgraph DocValuesFields["DocValues"]
+    F5 -- docValues --> dv5["search,java,lucene"]
   end
 ```
 

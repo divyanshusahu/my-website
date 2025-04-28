@@ -8,7 +8,13 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import Layout from "../../components/Layout";
 import Footer from "../../components/Footer";
+import MermaidWrapper from "../../components/MermaidWrapper";
 import { getAllBlogSlugs, getBlogBySlug } from "../../lib/blog";
+
+// Custom components for MDX
+const components = {
+  // No need for custom pre component, MermaidWrapper will handle it
+};
 
 function BlogPost({ blog, mdxSource }) {
   const router = useRouter();
@@ -172,7 +178,9 @@ function BlogPost({ blog, mdxSource }) {
                   </div>
 
                   <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-mono prose-headings:text-slate-800 dark:prose-headings:text-slate-100 prose-h1:text-2xl prose-h2:text-xl prose-h2:border-b prose-h2:border-slate-200 dark:prose-h2:border-slate-700 prose-h2:pb-2 prose-a:text-emerald-600 dark:prose-a:text-emerald-400 prose-code:text-emerald-600 dark:prose-code:text-emerald-400 prose-pre:bg-slate-800 prose-pre:border prose-pre:border-slate-700">
-                    <MDXRemote {...mdxSource} />
+                    <MermaidWrapper>
+                      <MDXRemote {...mdxSource} components={components} />
+                    </MermaidWrapper>
                   </div>
                 </div>
               </div>
@@ -185,14 +193,6 @@ function BlogPost({ blog, mdxSource }) {
   );
 }
 
-export async function getStaticPaths() {
-  const paths = getAllBlogSlugs();
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
 export async function getStaticProps({ params }) {
   const blog = getBlogBySlug(params.slug);
   const mdxSource = await serialize(blog.content, {
@@ -200,7 +200,7 @@ export async function getStaticProps({ params }) {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypeHighlight],
     },
-    scope: blog,
+    parseFrontmatter: true,
   });
 
   return {
@@ -208,6 +208,14 @@ export async function getStaticProps({ params }) {
       blog,
       mdxSource,
     },
+  };
+}
+
+export async function getStaticPaths() {
+  const paths = getAllBlogSlugs();
+  return {
+    paths,
+    fallback: false,
   };
 }
 
