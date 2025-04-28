@@ -7,18 +7,18 @@ tags: ['lucene', 'java', 'search', 'indexing', 'full-text-search', 'architecture
 
 # Understanding Apache Lucene
 
-Apache Lucene is a high-performance, full-featured text search engine library written in Java. It provides the building blocks for adding powerful, scalable search capabilities to your applications. In this blog, we’ll take a comprehensive look at Lucene’s architecture, focusing on how documents are indexed and searched, how the inverted index works, and how queries are processed efficiently. We’ll also explore how to model your data using Lucene’s Document and Field abstractions, the importance of choosing the right FieldType for your use case, and best practices for optimizing index size, speed, and query capabilities. Whether you’re new to Lucene or looking to deepen your understanding, this guide will help you make informed decisions when building search features into your applications.
+Apache Lucene is a high-performance, full-featured text search engine library written in Java. It provides the building blocks for adding powerful, scalable search capabilities to your applications. In this blog, we'll take a comprehensive look at Lucene's architecture, focusing on how documents are indexed and searched, how the inverted index works, and how queries are processed efficiently. We'll also explore how to model your data using Lucene's Document and Field abstractions, the importance of choosing the right FieldType for your use case, and best practices for optimizing index size, speed, and query capabilities. Whether you're new to Lucene or looking to deepen your understanding, this guide will help you make informed decisions when building search features into your applications.
 
 ---
 
 ## High-Level Flow: From Documents to Search Hits
 
-Lucene’s world revolves around two key operations:
+Lucene's world revolves around two key operations:
 
 1. **Indexing** – Turning your documents into an on-disk data structure optimized for search.  
 2. **Searching** – Translating a user query into lookups against that structure, scoring, and returning matching documents.
 
-Let’s walk through each phase.
+Let's walk through each phase.
 
 ---
 
@@ -34,7 +34,7 @@ Imagine you have three short documents:
 
 #### Step A: Analysis
 
-Each document’s text is fed through an **Analyzer** (we’ll deep-dive later). For now, assume it:
+Each document's text is fed through an **Analyzer** (we'll deep-dive later). For now, assume it:
 
 - Lowercases everything  
 - Splits on whitespace and punctuation  
@@ -79,7 +79,7 @@ A posting list is just a list of document IDs where that term appears (Lucene al
 - The index files (term dictionary, postings, stored fields) are written to a **Directory** on disk.
 - A **commit** makes the new data durable and visible to readers.
 
-> 🔧 Tip: Commits are expensive (fsync). Batch multiple document additions in a single commit, or use “soft commits” for faster near-real-time visibility.
+> 🔧 Tip: Commits are expensive (fsync). Batch multiple document additions in a single commit, or use "soft commits" for faster near-real-time visibility.
 
 ---
 
@@ -102,16 +102,49 @@ When a user types **"quick fox"**, Lucene performs:
 
 Here's a diagram of the search flow:
 
-<img src="/graphs/sample-flowchart.svg" alt="search sample flowchart" width="50%" style={{margin: 'auto'}} />
+```
+┌──────────────┐        ┌───────────────┐
+│  User Query  │        │   Analyzer    │
+│ "quick fox"  │───────▶│ Tokenization  │
+└──────────────┘        │ Normalization │
+                        └───────┬───────┘
+                                │
+                                ▼
+                        ┌───────────────┐         ┌───────────────┐
+                        │  Term Lookup  │         │ Posting Lists │
+                        │    "quick"    │────────▶│  quick:[1,2]  │
+                        │     "fox"     │         │   fox:[1]     │
+                        └───────┬───────┘         └───────────────┘
+                                │
+                                ▼
+                        ┌───────────────┐
+                        │ Boolean Merge │
+                        │  Intersection │
+                        │    Result:[1] │
+                        └───────┬───────┘
+                                │
+                                ▼
+                        ┌───────────────┐
+                        │    Scoring    │
+                        │  TF-IDF/BM25  │
+                        └───────┬───────┘
+                                │
+                                ▼
+                        ┌───────────────┐
+                        │ Return Result │
+                        │   DocID: 1    │
+                        │  Score: 0.75  │
+                        └───────────────┘
+```
 
 ---
 
 ## Modeling Your Data in Lucene: Documents, Fields & FieldTypes
 
-When you build a search index with Lucene, your first task is to decide **what** to index and **how** to index it. Lucene’s core abstraction for this is the **Document**, a container of **Fields** that describe the data you want to make searchable, sortable, facetable, or retrievable. Choosing the right **FieldType** for each Field determines:
+When you build a search index with Lucene, your first task is to decide **what** to index and **how** to index it. Lucene's core abstraction for this is the **Document**, a container of **Fields** that describe the data you want to make searchable, sortable, facetable, or retrievable. Choosing the right **FieldType** for each Field determines:
 
 - **How** the data is broken into tokens (if at all)  
-- **Whether** it’s indexed for search or stored for retrieval  
+- **Whether** it's indexed for search or stored for retrieval  
 - **Whether** it participates in sorting, faceting, or aggregations
 
 ---
@@ -140,7 +173,7 @@ These flags determine the on-disk structures Lucene builds for that Field:
 - **Tokenized**: broken into terms via Analyzer  
 - **Stored**: original value retrievable in search results  
 - **DocValues**: column-oriented storage for sorting, faceting, aggregations  
-- **TermVectors**: per-document postings for highlighting or “more like this”
+- **TermVectors**: per-document postings for highlighting or "more like this"
 
 ---
 
@@ -172,7 +205,7 @@ BlogPost {
 }
 ```
 
-Here’s how you might index it in Lucene:
+Here's how you might index it in Lucene:
 
 | Field       | FieldType                             | Indexed | Tokenized | Stored    | DocValues  | Purpose                             |
 |-------------|:-------------------------------------:|:-------:|:---------:|:---------:|:----------:|:-----------------------------------:|
@@ -186,8 +219,30 @@ Here’s how you might index it in Lucene:
 
 ### Visualizing the Index Paths
 
-
-<img src="/graphs/lucene-search-flow.svg" alt="search sample flowchart" style={{height: '200%'}} />
+```
+                        DOCUMENT
+                            │
+           ┌───────────────┬┴┬───────────────┐
+           │               │ │               │
+           ▼               ▼ ▼               ▼
+    ┌────────────┐   ┌────────────┐   ┌────────────┐
+    │   INDEXED   │   │   STORED   │   │  DOCVALUES │
+    │    FIELDS   │   │   FIELDS   │   │   FIELDS   │
+    └──────┬─────┘   └─────────────┘   └─────┬──────┘
+           │                                 │
+    ┌──────┴─────┐                     ┌─────┴──────┐
+    │             │                     │            │
+    ▼             ▼                     ▼            ▼
+┌─────────┐  ┌──────────┐         ┌─────────┐  ┌─────────┐
+│ INVERTED │  │ NUMERIC  │         │ SORTED  │  │ NUMERIC │
+│  INDEX   │  │ POINTS   │         │(Strings)│  │(Numbers)│
+└─────────┘  └──────────┘         └─────────┘  └─────────┘
+    │             │                     │            │
+┌───┴─────┐  ┌────┴───┐           ┌─────┴────┐ ┌────┴────┐
+│ TERMS/  │  │  BKD   │           │ FACETING │ │ SORTING │
+│POSTINGS │  │ TREES  │           │          │ │         │
+└─────────┘  └────────┘           └──────────┘ └─────────┘
+```
 
 ---
 

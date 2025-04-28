@@ -66,42 +66,10 @@
   }
 }
 
-/* Mermaid Diagram Styling */
-.mermaid-diagram {
-  @apply rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-800 p-2 md:p-4 border border-slate-200 dark:border-slate-700 shadow-sm;
-}
-
-.mermaid-diagram .mermaid {
-  @apply flex justify-center;
-}
-
-/* Ensure theme compatibility */
-.dark .mermaid-diagram .label {
-  @apply fill-slate-300 text-slate-300;
-}
-
-.dark .mermaid-diagram .node rect,
-.dark .mermaid-diagram .node circle,
-.dark .mermaid-diagram .node polygon,
-.dark .mermaid-diagram .node path {
-  @apply fill-slate-700 stroke-emerald-500;
-}
-
-.dark .mermaid-diagram .edgeLabel {
-  @apply bg-transparent text-slate-300;
-}
-
-.dark .mermaid-diagram .edgePath .path,
-.dark .mermaid-diagram line {
-  @apply stroke-slate-500;
-}
-
-.dark .mermaid-diagram .edgePath marker {
-  @apply fill-slate-500;
-}
-
-.dark .mermaid-diagram .cluster rect {
-  @apply fill-slate-900 stroke-slate-600;
+/* ASCII diagram styling */
+pre {
+  @apply rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-800 p-2 md:p-4 border border-slate-200 dark:border-slate-700 shadow-sm my-6 overflow-x-auto;
+  max-width: 100%;
 }
 
 /* Added animations */
