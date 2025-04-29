@@ -153,31 +153,22 @@ When you build a search index with Lucene, your first task is to decide **what**
 
 A Lucene **Document** is simply a collection of Fields. Unlike a rigid schema or ORM, Lucene treats every Document as a bag of `(name, value, FieldType)` triples. You can mix and match FieldTypes to suit different query and storage patterns.
 
-### Anatomy of a Field
+### Understanding Fields and FieldTypes
 
+A Field consists of three key components:
 - **Name**: a string key  
 - **Value**: text, number, date, or binary  
-- **FieldType**: a configuration object controlling indexing, tokenization, storage, DocValues, term vectors, and norms  
+- **FieldType**: a configuration object controlling how Lucene processes and stores the field
 
-These flags determine the on-disk structures Lucene builds for that Field:
+Each FieldType configures several important attributes:
 
-| Feature         | Indexed? | Tokenized? | Stored? | DocValues? | TermVectors? |
-|-----------------|:--------:|:----------:|:-------:|:----------:|:------------:|
-| **TextField**   | ✅        | ✅          | Optional| ❌          | Optional     |
-| **StringField** | ✅        | ❌          | Optional| ❌          | ❌           |
-| **PointField**  | ✅        | ❌          | ❌      | ❌          | ❌           |
-| **StoredField** | ❌        | ❌          | ✅      | ❌          | ❌           |
-| **DocValues**   | ❌        | ❌          | ❌      | ✅          | ❌           |
+- **Indexed**: Whether the field participates in inverted index or BKD tree (for searching)
+- **Tokenized**: Whether content is broken into terms via Analyzer
+- **Stored**: Whether the original value is retrievable in search results
+- **DocValues**: Whether column-oriented storage is used for sorting, faceting, aggregations
+- **TermVectors**: Whether per-document postings are stored for highlighting or "more like this" features
 
-- **Indexed**: participates in inverted index or BKD tree  
-- **Tokenized**: broken into terms via Analyzer  
-- **Stored**: original value retrievable in search results  
-- **DocValues**: column-oriented storage for sorting, faceting, aggregations  
-- **TermVectors**: per-document postings for highlighting or "more like this"
-
----
-
-### FieldTypes at a Glance
+Here's a comprehensive view of Lucene's common FieldTypes and their capabilities:
 
 | FieldType                     | Indexed | Tokenized | Stored | DocValues | Typical Use Cases                    |
 |-------------------------------|:-------:|:---------:|:------:|:---------:|--------------------------------------|
