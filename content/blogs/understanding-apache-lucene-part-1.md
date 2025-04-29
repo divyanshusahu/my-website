@@ -217,18 +217,18 @@ Here's how you might index it in Lucene:
            │               │ │               │
            ▼               ▼ ▼               ▼
     ┌────────────┐   ┌────────────┐   ┌────────────┐
-    │   INDEXED   │   │   STORED   │   │  DOCVALUES │
-    │    FIELDS   │   │   FIELDS   │   │   FIELDS   │
-    └──────┬─────┘   └─────────────┘   └─────┬──────┘
+    │   INDEXED  │   │   STORED   │   │  DOCVALUES │
+    │    FIELDS  │   │   FIELDS   │   │   FIELDS   │
+    └──────┬─────┘   └────────────┘   └─────┬──────┘
            │                                 │
     ┌──────┴─────┐                     ┌─────┴──────┐
-    │             │                     │            │
-    ▼             ▼                     ▼            ▼
+    │            │                     │            │
+    ▼             ▼                    ▼            ▼
 ┌─────────┐  ┌──────────┐         ┌─────────┐  ┌─────────┐
-│ INVERTED │  │ NUMERIC  │         │ SORTED  │  │ NUMERIC │
-│  INDEX   │  │ POINTS   │         │(Strings)│  │(Numbers)│
+│ INVERTED│  │ NUMERIC  │         │ SORTED  │  │ NUMERIC │
+│  INDEX  │  │ POINTS   │         │(Strings)│  │(Numbers)│
 └─────────┘  └──────────┘         └─────────┘  └─────────┘
-    │             │                     │            │
+    │             │                     │           │
 ┌───┴─────┐  ┌────┴───┐           ┌─────┴────┐ ┌────┴────┐
 │ TERMS/  │  │  BKD   │           │ FACETING │ │ SORTING │
 │POSTINGS │  │ TREES  │           │          │ │         │
