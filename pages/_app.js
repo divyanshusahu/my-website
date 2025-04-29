@@ -8,15 +8,18 @@ function MyApp({ Component, pageProps }) {
     "@context": "http://schema.org",
     "@type": "WebSite",
     name: "Divyanshu Sahu",
-    url: "https://www.divyanshusahu.vercel.app",
+    url: "https://www.divyanshu.pro",
     creator: { "@type": "Person", name: "Divyanshu Sahu" },
     keywords: [
       "Divyanshu Sahu",
+      "Senior Software Engineer",
+      "DevOps",
+      "Apache Lucene",
+      "Search Technologies",
+      "Elasticsearch",
+      "Solr",
       "Full Stack",
       "Developer",
-      "Application",
-      "Security",
-      "Information Security",
       "IIT",
       "Roorkee",
       "Zeus Numerix",
@@ -26,10 +29,18 @@ function MyApp({ Component, pageProps }) {
       "ReactJS",
       "Django",
       "NextJS",
-      "Flask",
       "NodeJS",
-      "Python",
-      "FastAPI",
+      "CI/CD",
+      "Kubernetes",
+      "Docker",
+      "Cloud Infrastructure",
+      "AWS",
+      "Indexing",
+      "Search Architecture",
+      "Information Retrieval",
+      "Full-text Search",
+      "Blog",
+      "Technical Blog"
     ],
     sameAs: [
       "https://www.facebook.com/divyanshu.sahu1997",
@@ -37,17 +48,30 @@ function MyApp({ Component, pageProps }) {
       "https://www.linkedin.com/in/divyanshu-sahu/",
     ],
   };
+  
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Divyanshu Sahu's Blog",
+    "description": "Technical writings on DevOps, Apache Lucene, search technologies, and software engineering",
+    "url": "https://www.divyanshu.pro/blogs",
+    "author": {
+      "@type": "Person",
+      "name": "Divyanshu Sahu",
+      "url": "https://www.divyanshu.pro"
+    }
+  };
 
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Divyanshu Sahu | Full Stack Developer</title>
+        <title>Divyanshu Sahu | Senior Software Engineer</title>
         <meta
           name="description"
-          content="Divyanshu Sahu. Full Stack Developer and Application Security Enthusiast.
-        B.Tech in Computer Science from Indian Institute of technology, Roorkee. Currently 
-        in Blinkit(formerly Grofers) and Zomato."
+          content="Divyanshu Sahu. Senior Software Engineer with expertise in DevOps and Apache Lucene search technologies.
+        B.Tech in Computer Science from Indian Institute of Technology, Roorkee. Currently 
+        in Blinkit(formerly Grofers) and Zomato. Blog about search technologies and DevOps practices."
         />
 
         <link
@@ -77,32 +101,32 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:creator" content="divyan5hu" />
         <meta
           name="twitter:url"
-          content="https://www.divyanshusahu.vercel.app"
+          content="https://www.divyanshu.pro"
         />
         <meta name="twitter:title" content="Divyanshu Sahu" />
         <meta
           name="twitter:description"
-          content="Full Stack Developer and Application Security Enthusiast."
+          content="Senior Software Engineer with expertise in DevOps and Apache Lucene. Read my tech blog for insights on search technologies and cloud infrastructure."
         />
         <meta
           name="twitter:image"
-          content="https://www.divyanshusahu.vercel.app/profile.jpeg"
+          content="https://www.divyanshu.pro/profile.jpeg"
         />
         <meta name="twitter:image:alt" content="Profile" />
 
         <meta
           property="og:url"
-          content="https://www.divyanshusahu.vercel.app"
+          content="https://www.divyanshu.pro"
         />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Divyanshu Sahu" />
         <meta
           property="og:description"
-          content="Full Stack Developer and Application Security Enthusiast."
+          content="Senior Software Engineer with expertise in DevOps and Apache Lucene. Read my tech blog for insights on search technologies and cloud infrastructure."
         />
         <meta
           property="og:image"
-          content="https://www.divyanshusahu.vercel.app/profile.jpeg"
+          content="https://www.divyanshu.pro/profile.jpeg"
         />
         <meta property="og:image:alt" content="Profile" />
         <meta property="og:site_name" content="Divyanshu's Personal Website" />
@@ -140,6 +164,13 @@ function MyApp({ Component, pageProps }) {
         id="jsonld-website"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld_website) }}
+      />
+      
+      <Script
+        key="jsonld_blog"
+        id="jsonld-blog"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
 
       <Script

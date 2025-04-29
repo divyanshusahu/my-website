@@ -63,14 +63,62 @@ function BlogIndex({ blogs }) {
     setIsLoaded(true);
   }, []);
   
+  // Create structured data for blog listing
+  const blogListSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "headline": "Blog Posts by Divyanshu Sahu",
+    "description": "Blogs on technology, application security, web development, and programming best practices.",
+    "url": "https://www.divyanshu.pro/blogs",
+    "author": {
+      "@type": "Person",
+      "name": "Divyanshu Sahu"
+    },
+    "inLanguage": "en-US",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": blogs.map((blog, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://www.divyanshu.pro/blogs/${blog.slug}`,
+        "name": blog.title,
+        "description": blog.description
+      }))
+    }
+  };
+  
   return (
     <div className="flex flex-col min-h-screen">
       <Head>
-        <title>Blogs | Divyanshu Sahu</title>
+        <title>Blog | Divyanshu Sahu</title>
         <meta
           name="description"
-          content="Blogs by Divyanshu Sahu on technology, application security, and web development."
+          content="Technical articles and insights on web development, application security, search engines, and programming best practices."
         />
+        
+        {/* SEO meta tags */}
+        <meta name="keywords" content="blog, technical writing, coding tutorials, web development, application security, Lucene, search engine, programming, full-stack development" />
+        <meta name="author" content="Divyanshu Sahu" />
+        
+        {/* Open Graph meta tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Blog | Divyanshu Sahu" />
+        <meta property="og:description" content="Technical articles and insights on web development, application security, search engines, and programming best practices." />
+        <meta property="og:url" content="https://www.divyanshu.pro/blogs" />
+        <meta property="og:image" content="https://www.divyanshu.pro/profile.jpeg" />
+        <meta property="og:site_name" content="Divyanshu Sahu's Blog" />
+        
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Blog | Divyanshu Sahu" />
+        <meta name="twitter:description" content="Technical articles and insights on web development, application security, search engines, and programming best practices." />
+        <meta name="twitter:image" content="https://www.divyanshu.pro/profile.jpeg" />
+        
+        {/* Schema.org structured data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListSchema) }} />
+        
+        {/* Additional meta tags for blog discovery */}
+        <link rel="canonical" href="https://www.divyanshu.pro/blogs" />
       </Head>
 
       <div className="flex-grow">
