@@ -32,6 +32,8 @@ Imagine you have three short documents:
 | 2     | "Quick brown dogs!"     |
 | 3     | "Lazy foxes leap slowly." |
 
+> For readability, the `DocID` values in these examples are synthetic labels. Real Lucene internal doc IDs are implementation details, not stable business identifiers, and they can change as readers reopen or segments merge.
+
 #### Step A: Analysis
 
 Each document's text is fed through an **Analyzer** (we'll deep-dive later). For now, assume it:
@@ -50,6 +52,8 @@ Each document's text is fed through an **Analyzer** (we'll deep-dive later). For
 
 > 🔧 **Tip:**  
 > Early normalization (lowercasing, stop word removal) shrinks your index and speeds up searches—but be sure to match the same analysis on queries!
+>
+> Also note that this simplified example only shows final terms. In real Lucene analysis, removing stop words often leaves **position gaps**, which affects phrase and slop behavior later.
 
 ---
 
@@ -77,9 +81,9 @@ A posting list is just a list of document IDs where that term appears (Lucene al
 #### Step C: Store & Commit
 
 - The index files (term dictionary, postings, stored fields) are written to a **Directory** on disk.
-- A **commit** makes the new data durable and visible to readers.
+- A **commit** creates a new durable commit point that newly opened readers can see.
 
-> 🔧 Tip: Commits are expensive (fsync). Batch multiple document additions in a single commit, or use "soft commits" for faster near-real-time visibility.
+> 🔧 Tip: Commits are expensive (fsync). Batch multiple document additions in a single commit. If you need fresher search visibility between commits, Lucene typically relies on **near-real-time readers / reopening searchers**, not a "soft commit" concept.
 
 ---
 
@@ -92,13 +96,15 @@ When a user types **"quick fox"**, Lucene performs:
 2. **Term Lookup**
     - Fetch postings for "quick": `[1, 2]`
     - Fetch postings for "fox": `[1]`
-3. **Boolean Merge (`AND` by default)**
+3. **Boolean Merge (intersection for this example)**
     - Intersection: `[1]`
 4. **Scoring**
     - Compute a relevance score for Doc 1 based on TF-IDF/BM25 and any boosts or field norms.
 5. **Result Formatting**
     - Retrieve stored fields (e.g., title, snippet) for Doc 1
     - Return to the caller with score and document data
+
+> In real Lucene usage, the default Boolean operator depends on how the query is constructed or parsed. This example is intentionally showing an **AND-style** merge for simplicity.
 
 Here's a diagram of the search flow:
 
@@ -258,7 +264,7 @@ At query time, a clause like `tags:lucene` matches any Document with at least on
     - Point fields and DocValues add files but speed up numeric/range operations.
 - Query Capabilities
     - Phrase and proximity queries require position data (enabled by default in TextField).
-    - Highlighting needs term vectors.
+    - Highlighting often benefits from term vectors or stored offsets, but the exact requirements depend on which highlighter implementation you use.
 - Retrieval & Display
     - StoredFields let you return the original content without a separate datastore.
 - Sorting & Faceting
@@ -332,6 +338,8 @@ TokenFilters consume the Tokenizer’s output, allowing you to modify, remove, o
 > After `LowerCaseFilter`: `["the", "running", "dogs"]`  
 > After `StopFilter` (removing “the”): `["running", "dogs"]`  
 > After `PorterStemFilter`: `["run", "dog"]`
+>
+> In Lucene's real token stream, removing `"the"` usually advances the next token's **position increment** rather than pretending the stop word never existed. That detail matters for phrase and proximity queries.
 
 ---
 
